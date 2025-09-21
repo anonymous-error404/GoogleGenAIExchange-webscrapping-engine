@@ -32,7 +32,7 @@ jobs:
 
       - name: Run script
         env:
-          MHF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
           SUPA_URL: ${{ secrets.SUPA_URL }}
           SUPA_TOKEN : ${{ secrets.SUPA_TOKEN }}
         run: python integrated_scraper.py
