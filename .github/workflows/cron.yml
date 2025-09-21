@@ -35,4 +35,4 @@ jobs:
           MHF_TOKEN: ${{ secrets.HF_TOKEN }}
           SUPA_URL: ${{ secrets.SUPA_URL }}
           SUPA_TOKEN : ${{ secrets.SUPA_TOKEN }}
-        run: python script.py
+        run: python integrated_scraper.py
