@@ -1,10 +1,9 @@
-name: Web Scrapping Engine
+name: Python Cron Job
 
 on:
   schedule:
-    # Runs every 5 minutes
     - cron: "*/5 * * * *"
-  workflow_dispatch:   # optional, lets you trigger manually from GitHub UI
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -19,9 +18,21 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
       - name: Install dependencies
         run: |
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run script
-        run: python integrated_scraper.py
+        env:
+          MHF_TOKEN: ${{ secrets.HF_TOKEN }}
+          SUPA_URL: ${{ secrets.SUPA_URL }}
+          SUPA_TOKEN : ${{ secrets.SUPA_TOKEN }}
+        run: python script.py
