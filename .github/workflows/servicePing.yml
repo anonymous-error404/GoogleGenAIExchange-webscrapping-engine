@@ -1,8 +1,9 @@
 name: API Caller
 
 on:
+  workflow_dispatch:       # allows manual trigger from GitHub UI
   schedule:
-    - cron: "*/5 * * * *"   # every 5 minutes (UTC time)
+    - cron: "*/5 * * * *"  # every 5 minutes (UTC time)
 
 jobs:
   call-api:
